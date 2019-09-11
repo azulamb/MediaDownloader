@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "bin"
+		},
+		{
+			"path": "dist"
+		},
+		{
+			"path": "src"
+		}
+	]
+}

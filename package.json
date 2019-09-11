@@ -1,0 +1,30 @@
+{
+  "name": "mdl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "bin": {
+    "mdl": "./bin/mdl"
+  },
+  "scripts": {
+    "build": "tsc -p src",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HirokiMiyaoka/MediaDownloader.git"
+  },
+  "author": "Hiroki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HirokiMiyaoka/MediaDownloader/issues"
+  },
+  "homepage": "https://github.com/HirokiMiyaoka/MediaDownloader#readme",
+  "dependencies": {
+    "puppeteer": "^1.19.0"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^1.19.1"
+  }
+}
