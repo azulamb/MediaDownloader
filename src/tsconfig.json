@@ -3,7 +3,7 @@
 		"outDir": "../dist",
 		"module": "commonjs",
 		"target": "es2018",
-		"declaration": false,
+		"declaration": true,
 		"strictNullChecks": true,
 		"noImplicitAny": true,
 		"removeComments": true,
