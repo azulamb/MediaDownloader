@@ -1,6 +1,7 @@
-import { MediaDownloader, Version } from './MediaDownloader'
+import * as mdl from './MediaDownloader'
 
-export class MDL extends MediaDownloader{}
+export const Version = mdl.Version;
+export const MediaDownloader = mdl.MediaDownloader;
 
 if ( require.main === module ) { Exec(); }
 
@@ -53,7 +54,7 @@ export async function Exec()
 		return arg;
 	} )();
 
-	const mdl = new MediaDownloader( arg.dir, arg.quiet );
+	const m = new mdl.MediaDownloader( arg.dir, arg.quiet );
 
 	if ( arg.url.length <= 0 )
 	{
@@ -61,7 +62,7 @@ export async function Exec()
 		process.exit( 1 );
 	}
 
-	await mdl.load();
-	await mdl.download( arg.url );
-	await mdl.close();
+	await m.load();
+	await m.download( arg.url );
+	await m.close();
 }

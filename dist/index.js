@@ -1,15 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const MediaDownloader_1 = require("./MediaDownloader");
-class MDL extends MediaDownloader_1.MediaDownloader {
-}
-exports.MDL = MDL;
+const mdl = require("./MediaDownloader");
+exports.Version = mdl.Version;
+exports.MediaDownloader = mdl.MediaDownloader;
 if (require.main === module) {
     Exec();
 }
 function Help() {
     console.log(`SNS Media downloader.
-Version ${MediaDownloader_1.Version}
+Version ${exports.Version}
 
 Target SNS: Twitter
 
@@ -23,7 +22,7 @@ Options:
     process.exit(0);
 }
 function Ver() {
-    console.log('Version ' + MediaDownloader_1.Version);
+    console.log('Version ' + exports.Version);
     process.exit(0);
 }
 async function Exec() {
@@ -59,15 +58,15 @@ async function Exec() {
         }
         return arg;
     })();
-    const mdl = new MediaDownloader_1.MediaDownloader(arg.dir, arg.quiet);
+    const m = new mdl.MediaDownloader(arg.dir, arg.quiet);
     if (arg.url.length <= 0) {
         if (!arg.quiet) {
             console.error('No url...');
         }
         process.exit(1);
     }
-    await mdl.load();
-    await mdl.download(arg.url);
-    await mdl.close();
+    await m.load();
+    await m.download(arg.url);
+    await m.close();
 }
 exports.Exec = Exec;

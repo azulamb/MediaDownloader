@@ -1,13 +1,13 @@
 import { Extension } from "./types";
 export declare const Version: any;
-interface SuccessResult {
+export interface SuccessResult {
     url: string;
     files: {
         url: string;
         error?: any;
     }[];
 }
-interface FailureResult {
+export interface FailureResult {
     url: string;
     error: any;
 }
@@ -28,4 +28,3 @@ export declare class MediaDownloader {
         }[];
     }>;
 }
-export {};

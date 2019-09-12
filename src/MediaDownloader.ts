@@ -8,7 +8,7 @@ const PACKAGE_JSON = require( path.join( __dirname, '../package.json' ) );
 
 export const Version = PACKAGE_JSON.version;
 
-interface SuccessResult
+export interface SuccessResult
 {
 	url: string;
 	files:
@@ -18,7 +18,7 @@ interface SuccessResult
 	}[];
 }
 
-interface FailureResult
+export interface FailureResult
 {
 	url: string;
 	error: any;

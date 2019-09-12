@@ -1,4 +1,4 @@
-import { MediaDownloader } from './MediaDownloader';
-export declare class MDL extends MediaDownloader {
-}
+import * as mdl from './MediaDownloader';
+export declare const Version: any;
+export declare const MediaDownloader: typeof mdl.MediaDownloader;
 export declare function Exec(): Promise<void>;
