@@ -36,9 +36,9 @@ class MediaDownloader {
         return Promise.all(url.map((url) => {
             return this.manager.extension(url).then((extension) => {
                 return this.scraping(extension, url);
-            }).then(() => {
+            }).then((result) => {
                 this.logger.log('Success:', url);
-                return { url: url, error: null };
+                return { url: url, files: result.files };
             }).catch((error) => {
                 this.logger.error('Failure:', url);
                 return { url: url, error: error };
@@ -53,22 +53,20 @@ class MediaDownloader {
             await page.close();
             throw new Error('No download files.');
         }
-        const errors = [];
+        const urls = [];
         for (let url of files) {
             try {
                 await this.dl(url);
+                urls.push({ url: url });
                 this.logger.log('Success:', url);
             }
             catch (error) {
+                urls.push({ url: url, error: error });
                 this.logger.error('Failure:', url);
             }
         }
         await page.close();
-        if (0 < errors.length) {
-            throw new Error(errors.length === files.length ?
-                'Download failure: all.' :
-                'Download failure: ' + errors.length + '/' + files.length);
-        }
+        return { url: url, files: urls };
     }
 }
 exports.MediaDownloader = MediaDownloader;
