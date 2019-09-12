@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const MediaDownloader_1 = require("./MediaDownloader");
-exports.MDL = MediaDownloader_1.MediaDownloader;
+class MDL extends MediaDownloader_1.MediaDownloader {
+}
+exports.MDL = MDL;
 if (require.main === module) {
     Exec();
 }

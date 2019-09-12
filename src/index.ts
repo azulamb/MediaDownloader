@@ -1,6 +1,6 @@
 import { MediaDownloader, Version } from './MediaDownloader'
 
-export const MDL = MediaDownloader;
+export class MDL extends MediaDownloader{}
 
 if ( require.main === module ) { Exec(); }
 
