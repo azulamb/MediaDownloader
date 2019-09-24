@@ -380,6 +380,7 @@ export default class implements Extension
 				return !!tweet.extended_entities;
 			} ).map( ( tweet ) =>
 			{
+				const iparams = '?name=large';
 				for ( let media of tweet.extended_entities.media )
 				{
 					if ( media.type === 'video' )
@@ -397,7 +398,7 @@ export default class implements Extension
 						images.push( list[ max ].url );
 					} else
 					{
-						images.push( media.media_url_https );
+						images.push( media.media_url_https + iparams );
 					}
 				}
 			} );

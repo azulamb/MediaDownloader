@@ -35,6 +35,7 @@ class default_1 {
             Object.keys(tweets).map((key) => { return tweets[key]; }).filter((tweet) => {
                 return !!tweet.extended_entities;
             }).map((tweet) => {
+                const iparams = '?name=large';
                 for (let media of tweet.extended_entities.media) {
                     if (media.type === 'video') {
                         if (!media.video_info) {
@@ -50,7 +51,7 @@ class default_1 {
                         images.push(list[max].url);
                     }
                     else {
-                        images.push(media.media_url_https);
+                        images.push(media.media_url_https + iparams);
                     }
                 }
             });
