@@ -30,14 +30,16 @@ class default_1 {
     }
     async after(page) {
         return this.p.then((data) => {
+            this.logger.debug(data);
             const tweets = data.globalObjects.tweets;
             const images = [];
             Object.keys(tweets).map((key) => { return tweets[key]; }).filter((tweet) => {
                 return !!tweet.extended_entities;
             }).map((tweet) => {
+                this.logger.debug(tweet);
                 const iparams = '?name=large';
                 for (let media of tweet.extended_entities.media) {
-                    if (media.type === 'video') {
+                    if (media.type === 'video' || media.type === 'animated_gif') {
                         if (!media.video_info) {
                             continue;
                         }

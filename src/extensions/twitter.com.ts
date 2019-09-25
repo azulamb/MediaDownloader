@@ -211,7 +211,7 @@ interface MediaData
 	url: string;
 	display_url: string;
 	expanded_url: string;
-	type: 'photo' | 'video';
+	type: 'photo' | 'video' | 'animated_gif';
 	original_info:
 	{
 		width: number;
@@ -373,6 +373,7 @@ export default class implements Extension
 	{
 		return this.p.then( ( data ) =>
 		{
+			this.logger.debug( data );
 			const tweets = data.globalObjects.tweets;
 			const images: string[] = [];
 			Object.keys( tweets ).map( ( key ) => { return tweets[ key ]; } ).filter( ( tweet ) =>
@@ -380,10 +381,11 @@ export default class implements Extension
 				return !!tweet.extended_entities;
 			} ).map( ( tweet ) =>
 			{
+				this.logger.debug( tweet );
 				const iparams = '?name=large';
 				for ( let media of tweet.extended_entities.media )
 				{
-					if ( media.type === 'video' )
+					if ( media.type === 'video' || media.type === 'animated_gif' )
 					{
 						if ( !media.video_info ) { continue; }
 						const list = media.video_info.variants;

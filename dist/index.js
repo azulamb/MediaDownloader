@@ -17,6 +17,7 @@ Options:
  -h, --help     Print this message.
  -q             No output log.
  -d DIR         Save download directory. Default ./media
+ --debug        Debug mode.
  -v, --version  Print version.
 `);
     process.exit(0);
@@ -27,7 +28,7 @@ function Ver() {
 }
 async function Exec() {
     const arg = (() => {
-        const arg = { url: [], dir: null, quiet: false };
+        const arg = { url: [], dir: null, quiet: false, debug: false };
         for (let i = 2; i < process.argv.length; ++i) {
             if (process.argv[i].indexOf('http') === 0) {
                 arg.url.push(process.argv[i]);
@@ -45,6 +46,9 @@ async function Exec() {
                             }
                         }
                         break;
+                    case '--debug':
+                        arg.debug = true;
+                        break;
                     case '-h':
                     case '--help':
                         Help();
@@ -58,7 +62,7 @@ async function Exec() {
         }
         return arg;
     })();
-    const m = new mdl.MediaDownloader(arg.dir, arg.quiet);
+    const m = new mdl.MediaDownloader(arg.dir, arg.quiet, arg.debug);
     if (arg.url.length <= 0) {
         if (!arg.quiet) {
             console.error('No url...');

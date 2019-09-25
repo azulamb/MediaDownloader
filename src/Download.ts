@@ -82,6 +82,6 @@ export function DownloadGenerator( dir: string )
 
 	return ( url: string, file?: string ) =>
 	{
-		return Download(  url, dir,file );
+		return Download(  url, dir, file );
 	};
 }

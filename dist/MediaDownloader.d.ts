@@ -16,7 +16,7 @@ export declare class MediaDownloader {
     private manager;
     private browser;
     private dl;
-    constructor(dir: string | null, quiet?: boolean);
+    constructor(dir: string | null, quiet?: boolean, debug?: boolean);
     load(): Promise<void>;
     close(): void;
     download(url: string | string[]): Promise<(SuccessResult | FailureResult)[]>;

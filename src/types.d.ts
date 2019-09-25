@@ -5,6 +5,7 @@ export type Page = puppeteer.Page;
 export interface Logger
 {
 	log: ( ... messages: any[] ) => void;
+	debug: ( ... messages: any[] ) => void;
 	error: ( ... messages: any[] ) => void;
 }
 

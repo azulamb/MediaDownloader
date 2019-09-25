@@ -31,17 +31,23 @@ export class MediaDownloader
 	private browser: puppeteer.Browser;
 	private dl: ( url: string, file?: string ) => Promise<void>;
 
-	constructor( dir: string | null, quiet?: boolean )
+	constructor( dir: string | null, quiet?: boolean, debug?: boolean )
 	{
 		this.dl = DownloadGenerator(  dir === null ? path.join( __dirname,'../media' ) : ( path.isAbsolute( dir ) ? dir : path.join( process.cwd(), dir ) ) );
 		this.logger = quiet ?
 		{
 			log: () => {},
+			debug: () => {},
 			error: () => {},
 		}: {
 			log: ( ... messages: any[] ) => { console.log( ... messages ); },
+			debug: () => {},
 			error: ( ... messages: any[] ) => { console.error( ... messages ); },
 		};
+		if ( debug )
+		{
+			this.logger.debug =  ( ... messages: any[] ) => { console.debug( ... messages ); };
+		}
 		this.manager = new Manager();
 	}
 

@@ -7,16 +7,21 @@ const Download_1 = require("./Download");
 const PACKAGE_JSON = require(path.join(__dirname, '../package.json'));
 exports.Version = PACKAGE_JSON.version;
 class MediaDownloader {
-    constructor(dir, quiet) {
+    constructor(dir, quiet, debug) {
         this.dl = Download_1.DownloadGenerator(dir === null ? path.join(__dirname, '../media') : (path.isAbsolute(dir) ? dir : path.join(process.cwd(), dir)));
         this.logger = quiet ?
             {
                 log: () => { },
+                debug: () => { },
                 error: () => { },
             } : {
             log: (...messages) => { console.log(...messages); },
+            debug: () => { },
             error: (...messages) => { console.error(...messages); },
         };
+        if (debug) {
+            this.logger.debug = (...messages) => { console.debug(...messages); };
+        }
         this.manager = new Extensions_1.Manager();
     }
     load() {
