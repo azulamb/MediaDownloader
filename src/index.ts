@@ -63,8 +63,18 @@ export async function Exec()
 		if ( !arg.quiet ) { console.error( 'No url...' ); }
 		process.exit( 1 );
 	}
+	const ErrorExit = async () =>
+	{
+		await m.close();
+		process.exit( 2 );
+	};
+	process.on( 'SIGHUP', ErrorExit );
+	process.on( 'SIGINT', ErrorExit );
+	process.on( 'SIGBREAK', ErrorExit );
+	//process.on( 'SIGKILL', ErrorExit );
+	process.on( 'SIGTERM', ErrorExit );
 
-	await m.load();
-	await m.download( arg.url );
+	await m.load().catch( ( error ) => { console.error( error ); } );
+	await m.download( arg.url ).catch( ( error ) => { console.error( error ); } );
 	await m.close();
 }

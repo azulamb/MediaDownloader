@@ -69,8 +69,16 @@ async function Exec() {
         }
         process.exit(1);
     }
-    await m.load();
-    await m.download(arg.url);
+    const ErrorExit = async () => {
+        await m.close();
+        process.exit(2);
+    };
+    process.on('SIGHUP', ErrorExit);
+    process.on('SIGINT', ErrorExit);
+    process.on('SIGBREAK', ErrorExit);
+    process.on('SIGTERM', ErrorExit);
+    await m.load().catch((error) => { console.error(error); });
+    await m.download(arg.url).catch((error) => { console.error(error); });
     await m.close();
 }
 exports.Exec = Exec;
